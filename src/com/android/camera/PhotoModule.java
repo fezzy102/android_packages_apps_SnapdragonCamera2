@@ -3516,8 +3516,11 @@ public class PhotoModule
         }
 
         //Set Saturation
-        String saturationStr = getSaturationSafe();
-        if (saturationStr != null) {
+        if (CameraUtil.isSupported(mParameters, "saturation") &&
+                CameraUtil.isSupported(mParameters, "saturation-max")) {
+            String saturationStr = mPreferences.getString(
+                    CameraSettings.KEY_SATURATION,
+                    mActivity.getString(R.string.pref_camera_saturation_default));
             int saturation = Integer.parseInt(saturationStr);
             Log.v(TAG, "Saturation value =" + saturation);
             if((0 <= saturation) && (saturation <= mParameters.getMaxSaturation())){
@@ -3525,8 +3528,11 @@ public class PhotoModule
             }
         }
         // Set contrast parameter.
-        String contrastStr = getContrastSafe();
-        if (contrastStr != null) {
+        if (CameraUtil.isSupported(mParameters, "contrast") &&
+                CameraUtil.isSupported(mParameters, "contrast-max")) {
+            String contrastStr = mPreferences.getString(
+                    CameraSettings.KEY_CONTRAST,
+                    mActivity.getString(R.string.pref_camera_contrast_default));
             int contrast = Integer.parseInt(contrastStr);
             Log.v(TAG, "Contrast value =" + contrast);
             if ((0 <= contrast) && (contrast <= mParameters.getMaxContrast())) {
@@ -3534,8 +3540,11 @@ public class PhotoModule
             }
         }
         // Set sharpness parameter
-        String sharpnessStr = getSharpnessSafe();
-        if (sharpnessStr != null) {
+        if (CameraUtil.isSupported(mParameters, "sharpness") &&
+                CameraUtil.isSupported(mParameters, "sharpness-max")) {
+            String sharpnessStr = mPreferences.getString(
+                    CameraSettings.KEY_SHARPNESS,
+                    mActivity.getString(R.string.pref_camera_sharpness_default));
             int sharpness = Integer.parseInt(sharpnessStr) *
                     (mParameters.getMaxSharpness() / MAX_SHARPNESS_LEVEL);
             Log.v(TAG, "Sharpness value =" + sharpness);
